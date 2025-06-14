@@ -12,7 +12,7 @@ PASSWORD = os.getenv("NAUKRI_PASSWORD")
 RESUME_PATH = "Sunil_kumar_Python_Automation_Tester.pdf"
 
 options = Options()
-options.add_argument("--headless")
+# options.add_argument("--headless")
 options.add_argument("--no-sandbox")
 options.add_argument("--disable-dev-shm-usage")
 
