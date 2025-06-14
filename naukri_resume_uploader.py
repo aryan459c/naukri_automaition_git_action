@@ -10,7 +10,7 @@ from selenium.common.exceptions import TimeoutException, NoSuchElementException
 # Load credentials from environment variables
 USERNAME = os.environ.get("USERNAME", "")
 PASSWORD = os.environ.get("PASSWORD", "")
-RESUME_PATH = os.path.abspath("Sunil_Kumar_Maharana_PythonAutomationTester.pdf")
+RESUME_PATH = os.path.abspath("Sunil_kumar_Python_Automation_Tester.pdf")
 
 # Setup headless Chrome for GitHub Actions
 chrome_options = Options()
