@@ -7,8 +7,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
 
-USERNAME = os.environ.get("USERNAME", "")
-PASSWORD = os.environ.get("PASSWORD", "")
+USERNAME = os.environ.get("NAUKRI_USERNAME")
+PASSWORD = os.environ.get("NAUKRI_PASSWORD")
 RESUME_PATH = os.path.abspath("Sunil_kumar_Python_Automation_Tester.pdf")
 
 chrome_options = Options()
