@@ -9,7 +9,7 @@ from selenium.common.exceptions import TimeoutException, NoSuchElementException
 # Credentials from GitHub Secrets
 USERNAME = os.getenv("NAUKRI_USERNAME")
 PASSWORD = os.getenv("NAUKRI_PASSWORD")
-RESUME_PATH = os.path.abspath("Sunil_Kumar_PythonAutomationTester.pdf")
+RESUME_PATH = os.path.abspath("Sunil_kumar_Python_Automation_Tester.pdf")
 
 # Initialize WebDriver
 options = webdriver.ChromeOptions()
