@@ -1,16 +1,16 @@
-name: Daily Resume Upload to Naukri
+name: Resume Upload on Windows
 
 on:
   schedule:
-    - cron: '45 1 * * *'  # 7:15 AM IST (UTC+5:30)
+    - cron: '45 1 * * *'  # 7:15 AM IST
   workflow_dispatch:
 
 jobs:
   upload-resume:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Set up Python
@@ -23,14 +23,19 @@ jobs:
           python -m pip install --upgrade pip
           pip install selenium
 
-      - name: Install Chrome and ChromeDriver
+      - name: Download Chrome
         run: |
-          sudo apt-get update
-          sudo apt-get install -y chromium-browser chromium-chromedriver
-          sudo ln -s /usr/bin/chromium-browser /usr/bin/google-chrome
-          sudo ln -s /usr/lib/chromium-browser/chromedriver /usr/bin/chromedriver
+          choco install googlechrome --no-progress
 
-      - name: Run resume upload script
+      - name: Download ChromeDriver
+        run: |
+          choco install chromedriver --no-progress
+          echo "CHROMEWEBDRIVER=$env:ChocolateyInstall\lib\chromedriver\tools" >> $env:GITHUB_ENV
+
+      - name: Add ChromeDriver to PATH
+        run: echo "$env:CHROMEWEBDRIVER" >> $env:GITHUB_PATH
+
+      - name: Run Selenium Script
         env:
           NAUKRI_USERNAME: ${{ secrets.NAUKRI_USERNAME }}
           NAUKRI_PASSWORD: ${{ secrets.NAUKRI_PASSWORD }}
