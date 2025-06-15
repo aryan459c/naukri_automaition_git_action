@@ -24,15 +24,15 @@ driver.maximize_window()
 driver.get("https://www.naukri.com/")
 
 # Login
-WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.LINK_TEXT, "Login"))).click()
-WebDriverWait(driver, 10).until(
+WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.LINK_TEXT, "Login"))).click()
+WebDriverWait(driver, 30).until(
     EC.element_to_be_clickable((By.CSS_SELECTOR, 'input[placeholder="Enter your active Email ID / Username"]'))
 ).send_keys(USERNAME)
 driver.find_element(By.CSS_SELECTOR, 'input[placeholder="Enter your password"]').send_keys(PASSWORD)
 driver.find_element(By.CSS_SELECTOR, 'button[type="submit"]').click()
 
 # Wait for login
-WebDriverWait(driver, 15).until(EC.presence_of_element_located((By.XPATH, '//a[contains(@href, "mnjuser/profile")]')))
+WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, '//a[contains(@href, "mnjuser/profile")]')))
 
 # Go to profile page
 driver.get("https://www.naukri.com/mnjuser/profile")
@@ -56,7 +56,7 @@ except TimeoutException:
 
 # Upload new resume
 try:
-    upload_element = WebDriverWait(driver, 10).until(
+    upload_element = WebDriverWait(driver, 30).until(
         EC.presence_of_element_located((By.CSS_SELECTOR, 'input[id="attachCV"]'))
     )
     upload_element.send_keys(RESUME_PATH)
