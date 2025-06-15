@@ -1,7 +1,9 @@
 name: Run Naukri Resume Uploader
 
 on:
-  workflow_dispatch:
+  schedule:
+    - cron: '45 1 * * *'  # Runs at 1:45 AM UTC → 7:15 AM IST
+  workflow_dispatch:  # Also allows manual trigger
 
 jobs:
   run-script:
@@ -16,21 +18,17 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: Install Chrome and ChromeDriver
+      - name: Install Chrome 126 and matching ChromeDriver
         run: |
           sudo apt-get update
-          sudo apt-get install -y wget unzip
-          wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-          sudo apt install -y ./google-chrome-stable_current_amd64.deb
-          
-          # Get the major version of Chrome (e.g., 137)
-          CHROME_VERSION=$(google-chrome --version | awk '{print $3}' | cut -d '.' -f 1)
-          
-          # Fetch the matching ChromeDriver version
-          DRIVER_VERSION=$(curl -sS "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_${CHROME_VERSION}")
-          
-          # Download and install ChromeDriver
-          wget -N "https://chromedriver.storage.googleapis.com/${DRIVER_VERSION}/chromedriver_linux64.zip"
+          sudo apt-get install -y wget unzip curl
+
+          # Install Google Chrome 126.0.6478.57
+          wget https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_126.0.6478.57-1_amd64.deb
+          sudo dpkg -i google-chrome-stable_126.0.6478.57-1_amd64.deb || sudo apt-get -f install -y
+
+          # Install matching ChromeDriver
+          wget https://chromedriver.storage.googleapis.com/126.0.6478.57/chromedriver_linux64.zip
           unzip chromedriver_linux64.zip
           sudo mv chromedriver /usr/bin/chromedriver
           sudo chmod +x /usr/bin/chromedriver
